@@ -1,5 +1,18 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Svelte",
+
+  "compilerOptions": {
+    "module": "esNext",
+    "moduleResolution": "node",
+    "target": "esNext",
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "sourceMap": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/svelte/types"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
 
   "include": ["src/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
