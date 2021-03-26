@@ -2,7 +2,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import { config } from 'dotenv';
 import css from 'rollup-plugin-css-only';
 import livereload from 'rollup-plugin-livereload';
-import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
@@ -47,18 +46,6 @@ export default {
   },
   plugins: [
     css({ output: 'bundle.css' }),
-    postcss({
-      extract: true,
-      minimize: production,
-      use: [
-        [
-          'sass',
-          {
-            includePaths: ['./src/theme', './node_modules']
-          }
-        ]
-      ]
-    }),
     svelte({
       preprocess: sveltePreprocess({ sourceMap: !production }),
       compilerOptions: {
