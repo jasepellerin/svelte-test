@@ -1,9 +1,18 @@
 <script lang="ts">
+  import ThemeContainer from './components/ThemeContainer.svelte';
+  import ThemeSelector from './components/ThemeSelector.svelte';
   import Todos from './components/Todos.svelte';
+
+  import type { Theme } from './types/Theme';
+
+  let theme: Theme = 'g90';
 </script>
 
 <main>
-  <Todos />
+  <ThemeContainer persist bind:theme>
+    <Todos />
+    <ThemeSelector bind:theme />
+  </ThemeContainer>
 </main>
 
 <style>
