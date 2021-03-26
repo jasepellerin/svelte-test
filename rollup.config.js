@@ -2,6 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { config } from 'dotenv';
 import css from 'rollup-plugin-css-only';
 import livereload from 'rollup-plugin-livereload';
+import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
@@ -10,8 +11,6 @@ import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
 const production = !process.env.ROLLUP_WATCH;
-
-console.log(config);
 
 function serve() {
   let server;
@@ -47,22 +46,25 @@ export default {
     file: 'public/build/bundle.js'
   },
   plugins: [
+    css({ output: 'bundle.css' }),
+    postcss({
+      extract: true,
+      minimize: production,
+      use: [
+        [
+          'sass',
+          {
+            includePaths: ['./src/theme', './node_modules']
+          }
+        ]
+      ]
+    }),
     svelte({
       preprocess: sveltePreprocess({ sourceMap: !production }),
       compilerOptions: {
-        // enable run-time checks when not in production
         dev: !production
       }
     }),
-    // we'll extract any component CSS out into
-    // a separate file - better for performance
-    css({ output: 'bundle.css' }),
-
-    // If you have external dependencies installed from
-    // npm, you'll most likely need these plugins. In
-    // some cases you'll need additional configuration -
-    // consult the documentation for details:
-    // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
       dedupe: ['svelte']
@@ -84,6 +86,8 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser(),
+
+    // Add .env config to __app variable
     replace({
       preventAssignment: true,
       __app: JSON.stringify({

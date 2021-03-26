@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
+  import Card from '@smui/card';
 
   const dispatch = createEventDispatcher();
 
@@ -14,15 +15,17 @@
 </script>
 
 <li in:fly={{ x: 900, duration: 500 }} out:fade>
-  <span class:complete>
-    {text}
-  </span>
-  {#if complete}
-    <button on:click={toggleStatus}> ✔️ </button>
-  {:else}
-    <button on:click={toggleStatus}> ❌ </button>
-  {/if}
-  <button on:click={remove}> 🗑 </button>
+  <Card>
+    <span class:complete>
+      {text}
+    </span>
+    {#if complete}
+      <button on:click={toggleStatus}> ✔️ </button>
+    {:else}
+      <button on:click={toggleStatus}> ❌ </button>
+    {/if}
+    <button on:click={remove}> 🗑 </button>
+  </Card>
 </li>
 
 <style>

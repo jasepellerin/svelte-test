@@ -43,9 +43,9 @@
   {#each $todos as todo}
     <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
   {/each}
-
-  <input bind:value={text} placeholder="New Task..." />
-  <hr />
-  <p>Your task: <strong>{text}</strong></p>
-  <button on:click={add}>Add Task</button>
 </ul>
+
+<input bind:value={text} placeholder="New Task..." />
+<hr />
+<p>Your task: <strong>{text}</strong></p>
+<button on:click={add}>Add Task</button>
