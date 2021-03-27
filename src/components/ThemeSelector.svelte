@@ -6,11 +6,7 @@
 </script>
 
 <main>
-  <Select
-    labelText="Carbon theme"
-    bind:selected={theme}
-    style="margin-bottom: 1rem"
-  >
+  <Select inline labelText="Theme" bind:selected={theme}>
     <SelectItem value="white" text="White" />
     <SelectItem value="g10" text="Gray 10" />
     <SelectItem value="g90" text="Gray 90" />

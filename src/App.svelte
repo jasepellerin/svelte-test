@@ -1,6 +1,7 @@
 <script lang="ts">
+  import Content from './components/Content.svelte';
+  import Header from './components/Header.svelte';
   import ThemeContainer from './components/ThemeContainer.svelte';
-  import ThemeSelector from './components/ThemeSelector.svelte';
   import Todos from './components/Todos.svelte';
 
   import type { Theme } from './types/Theme';
@@ -10,8 +11,10 @@
 
 <main>
   <ThemeContainer persist bind:theme>
-    <Todos />
-    <ThemeSelector bind:theme />
+    <Header bind:theme />
+    <Content>
+      <Todos />
+    </Content>
   </ThemeContainer>
 </main>
 

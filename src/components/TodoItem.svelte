@@ -14,7 +14,7 @@
   export let complete: boolean;
 </script>
 
-<li in:fly={{ x: 900, duration: 500 }} out:fade>
+<li class="tile" in:fly={{ x: 900, duration: 500 }} out:fade>
   <Tile>
     <span class:complete>
       {text}
@@ -32,5 +32,9 @@
   .complete {
     text-decoration: line-through;
     color: green;
+  }
+
+  .tile:not(:last-child) {
+    margin-bottom: 10px;
   }
 </style>

@@ -1,8 +1,9 @@
 <script lang="ts">
-  import TodoItem from './TodoItem.svelte';
+  import { FluidForm, TextInput } from 'carbon-components-svelte';
   import { collectionData } from 'rxfire/firestore';
-  import { db } from '../firebase';
   import { startWith } from 'rxjs/operators';
+  import { db } from '../firebase';
+  import TodoItem from './TodoItem.svelte';
 
   export let userId = 1;
 
@@ -45,7 +46,12 @@
   {/each}
 </ul>
 
-<input bind:value={text} placeholder="New Task..." />
 <hr />
-<p>Your task: <strong>{text}</strong></p>
-<button on:click={add}>Add Task</button>
+
+<FluidForm on:submit={add}>
+  <TextInput
+    bind:value={text}
+    labelText="Create a new task"
+    placeholder="Task content..."
+  />
+</FluidForm>
