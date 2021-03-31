@@ -1,8 +1,6 @@
 import './firebase.ts';
 import App from './App.svelte';
 
-const app = new App({
-  target: document.body
+new App({
+  target: document.getElementById('app')
 });
-
-export default app;

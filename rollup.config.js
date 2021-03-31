@@ -1,3 +1,4 @@
+import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 import { config } from 'dotenv';
 import css from 'rollup-plugin-css-only';
@@ -47,7 +48,15 @@ export default {
   plugins: [
     css({ output: 'bundle.css' }),
     svelte({
-      preprocess: sveltePreprocess({ sourceMap: !production }),
+      preprocess: sveltePreprocess({
+        sourceMap: !production,
+        postcss: {
+          extract: true,
+          minimize: production,
+          sourceMap: false,
+          plugins: [autoprefixer()]
+        }
+      }),
       compilerOptions: {
         dev: !production
       }
